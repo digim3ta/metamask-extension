@@ -139,7 +139,7 @@ export default class ConfirmTransactionBase extends Component {
     isMultiLayerFeeNetwork: PropTypes.bool,
     isFailedTransaction: PropTypes.bool,
     removeTxFromFailedTxesToDisplay: PropTypes.func,
-    addTxToDisplay: PropTypes.func,
+    addTxToFailedTxesToDisplay: PropTypes.func,
   };
 
   state = {
@@ -748,7 +748,7 @@ export default class ConfirmTransactionBase extends Component {
       maxFeePerGas,
       maxPriorityFeePerGas,
       baseFeePerGas,
-      addTxToDisplay,
+      addTxToFailedTxesToDisplay,
     } = this.props;
     const { submitting } = this.state;
 
@@ -782,10 +782,11 @@ export default class ConfirmTransactionBase extends Component {
       () => {
         this._removeBeforeUnload();
 
-        addTxToDisplay(txData.id);
+        addTxToFailedTxesToDisplay(txData.id);
         sendTransaction(txData)
           .then(() => {
-            clearConfirmTransaction();
+            removeTxFromFailedTxesToDisplay();
+            clearConfirmTransaction();            
             this.setState(
               {
                 submitting: false,
