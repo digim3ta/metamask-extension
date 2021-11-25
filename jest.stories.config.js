@@ -3,7 +3,7 @@ module.exports = {
   collectCoverageFrom: ['<rootDir>/ui/**/*.js'],
   coverageDirectory: './jest-coverage/main',
   coveragePathIgnorePatterns: ['.stories.js', '.snap'],
-  coverageReporters: ['json', 'lcov', 'text', 'clover'],
+  coverageReporters: ['html', 'text-summary'],
   coverageThreshold: {
     global: {
       branches: 35,
